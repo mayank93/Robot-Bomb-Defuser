@@ -1,0 +1,12 @@
+﻿                                          INSTRUCTIONS
+ 
+
+                                            Keys information:
+                              
+                               UP                :-  w,W,up_arrowkey
+                               DOWN              :-  s,S,down_arrowkey
+                               RIGHT             :-  d,D,right_arrowkey
+                               LEFT              :-  a,A,left_arrowkey
+                               PAUSE             :-  p,P
+                               RESUME            :-  p,P
+                               QUIT              :-  Esc,q,Q,Ctrl-c

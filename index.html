@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Robot Bomb Defuser</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="title" content="Robot Bomb Defuser"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2013-06-04 13:30:38 IST"/>
+<meta name="author" content="Mayank"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">Robot Bomb Defuser</h1>
+
+<p><b>NAME</b> : <b>MAYANK GUPTA</b>
+</p>
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Code Organisation</a>
+<ul>
+<li><a href="#sec-1-1">1.1 design.py</a></li>
+<li><a href="#sec-1-2">1.2 About.txt</a></li>
+<li><a href="#sec-1-3">1.3 Instruction.txt</a></li>
+<li><a href="#sec-1-4">1.4 Credits.txt</a></li>
+<li><a href="#sec-1-5">1.5 bombDefuser.py</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2 Code Decomposition</a>
+<ul>
+<li><a href="#sec-2-1">2.1 Class Keys</a></li>
+<li><a href="#sec-2-2">2.2 Class Screen</a>
+<ul>
+<li><a href="#sec-2-2-1">2.2.1 end</a></li>
+<li><a href="#sec-2-2-2">2.2.2 clear</a></li>
+<li><a href="#sec-2-2-3">2.2.3 window</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-3">2.3 Class Enemy</a>
+<ul>
+<li><a href="#sec-2-3-1">2.3.1 enemyposdecider</a></li>
+<li><a href="#sec-2-3-2">2.3.2 checkexistence</a></li>
+<li><a href="#sec-2-3-3">2.3.3 move</a></li>
+<li><a href="#sec-2-3-4">2.3.4 getpos</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-4">2.4 Class Robot</a>
+<ul>
+<li><a href="#sec-2-4-1">2.4.1 move</a></li>
+<li><a href="#sec-2-4-2">2.4.2 getpos</a></li>
+<li><a href="#sec-2-4-3">2.4.3 whatatpos</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-5">2.5 Class Intro</a>
+<ul>
+<li><a href="#sec-2-5-1">2.5.1 firstscreen</a></li>
+<li><a href="#sec-2-5-2">2.5.2 secondscreen</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-6">2.6 Class Field</a>
+<ul>
+<li><a href="#sec-2-6-1">2.6.1 checkexistence</a></li>
+<li><a href="#sec-2-6-2">2.6.2 display</a></li>
+<li><a href="#sec-2-6-3">2.6.3 plant</a></li>
+</ul></li>
+</ul>
+</li>
+<li><a href="#sec-3">3 Control flow</a></li>
+<li><a href="#sec-4">4 Extra Features</a>
+<ul>
+<li><a href="#sec-4-1">4.1 Freedom to choose</a>
+<ul>
+<li><a href="#sec-4-1-1">4.1.1 Enemy Robot</a></li>
+<li><a href="#sec-4-1-2">4.1.2 Your Robot</a></li>
+<li><a href="#sec-4-1-3">4.1.3 Diffuse Code</a></li>
+<li><a href="#sec-4-1-4">4.1.4 Bomb</a></li>
+</ul>
+</li>
+<li><a href="#sec-4-2">4.2 Levels</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5 Screen Shots</a>
+<ul>
+<li><a href="#sec-5-1">5.1 Game in Level:2</a></li>
+<li><a href="#sec-5-2">5.2 Paused Game in Level:3</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Code Organisation</h2>
+<div class="outline-text-2" id="text-1">
+
+<p>   The program has been divided into five files:-
+</p>
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> design.py</h3>
+<div class="outline-text-3" id="text-1-1">
+
+<p> Contains the designs of robot,bomb,diffuse codes used in the game
+</p></div>
+
+</div>
+
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> About.txt</h3>
+<div class="outline-text-3" id="text-1-2">
+
+<p>   Gives a brief introduction of the game
+</p></div>
+
+</div>
+
+<div id="outline-container-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Instruction.txt</h3>
+<div class="outline-text-3" id="text-1-3">
+
+<p>   Give detail about various keys to be used in the game
+</p></div>
+
+</div>
+
+<div id="outline-container-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Credits.txt</h3>
+<div class="outline-text-3" id="text-1-4">
+
+<p>   A reference to me
+</p></div>
+
+</div>
+
+<div id="outline-container-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> bombDefuser.py</h3>
+<div class="outline-text-3" id="text-1-5">
+
+<p>   Contains the main game code. Imports/runs other modules if and when necessary.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Code Decomposition</h2>
+<div class="outline-text-2" id="text-2">
+
+
+</div>
+
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Class Keys</h3>
+<div class="outline-text-3" id="text-2-1">
+
+<p>   An object of this class when initallized,has all the keys to be used in the game with particular movement. 
+</p></div>
+
+</div>
+
+<div id="outline-container-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Class Screen</h3>
+<div class="outline-text-3" id="text-2-2">
+
+<p>   An object of this class when initallized, returns a screen of max size possible,with a specific border.
+</p>
+</div>
+
+<div id="outline-container-2-2-1" class="outline-4">
+<h4 id="sec-2-2-1"><span class="section-number-4">2.2.1</span> end</h4>
+<div class="outline-text-4" id="text-2-2-1">
+
+<p>    when this is called it end the window
+</p></div>
+
+</div>
+
+<div id="outline-container-2-2-2" class="outline-4">
+<h4 id="sec-2-2-2"><span class="section-number-4">2.2.2</span> clear</h4>
+<div class="outline-text-4" id="text-2-2-2">
+
+<p>    when this is called it clear the window,and put the bolrder again 
+</p></div>
+
+</div>
+
+<div id="outline-container-2-2-3" class="outline-4">
+<h4 id="sec-2-2-3"><span class="section-number-4">2.2.3</span> window</h4>
+<div class="outline-text-4" id="text-2-2-3">
+
+<p>    if called return the the window created
+</p></div>
+</div>
+
+</div>
+
+<div id="outline-container-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Class Enemy</h3>
+<div class="outline-text-3" id="text-2-3">
+
+<p>  This class is used to to generate enemies at random places
+</p>
+</div>
+
+<div id="outline-container-2-3-1" class="outline-4">
+<h4 id="sec-2-3-1"><span class="section-number-4">2.3.1</span> enemyposdecider</h4>
+<div class="outline-text-4" id="text-2-3-1">
+
+<p>    It generates random coordinates for enemy placement
+</p></div>
+
+</div>
+
+<div id="outline-container-2-3-2" class="outline-4">
+<h4 id="sec-2-3-2"><span class="section-number-4">2.3.2</span> checkexistence</h4>
+<div class="outline-text-4" id="text-2-3-2">
+
+<p>    check if at that particular coordinate already something is present
+</p></div>
+
+</div>
+
+<div id="outline-container-2-3-3" class="outline-4">
+<h4 id="sec-2-3-3"><span class="section-number-4">2.3.3</span> move</h4>
+<div class="outline-text-4" id="text-2-3-3">
+
+<p>    It moves the enemy robot
+</p></div>
+
+</div>
+
+<div id="outline-container-2-3-4" class="outline-4">
+<h4 id="sec-2-3-4"><span class="section-number-4">2.3.4</span> getpos</h4>
+<div class="outline-text-4" id="text-2-3-4">
+
+<p>    returns the position of enemy
+</p></div>
+</div>
+
+</div>
+
+<div id="outline-container-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Class Robot</h3>
+<div class="outline-text-3" id="text-2-4">
+
+<p> This class is used to generate user robot
+</p>
+</div>
+
+<div id="outline-container-2-4-1" class="outline-4">
+<h4 id="sec-2-4-1"><span class="section-number-4">2.4.1</span> move</h4>
+<div class="outline-text-4" id="text-2-4-1">
+
+<p>    moves the robot in the field according to user
+</p></div>
+
+</div>
+
+<div id="outline-container-2-4-2" class="outline-4">
+<h4 id="sec-2-4-2"><span class="section-number-4">2.4.2</span> getpos</h4>
+<div class="outline-text-4" id="text-2-4-2">
+
+<p>    returns the robot current position
+</p></div>
+
+</div>
+
+<div id="outline-container-2-4-3" class="outline-4">
+<h4 id="sec-2-4-3"><span class="section-number-4">2.4.3</span> whatatpos</h4>
+<div class="outline-text-4" id="text-2-4-3">
+
+<p>    returns the characters at current position of robot
+</p></div>
+</div>
+
+</div>
+
+<div id="outline-container-2-5" class="outline-3">
+<h3 id="sec-2-5"><span class="section-number-3">2.5</span> Class Intro</h3>
+<div class="outline-text-3" id="text-2-5">
+
+<p> Class which is used to get introduction window 
+</p>
+</div>
+
+<div id="outline-container-2-5-1" class="outline-4">
+<h4 id="sec-2-5-1"><span class="section-number-4">2.5.1</span> firstscreen</h4>
+<div class="outline-text-4" id="text-2-5-1">
+
+<p>    displays the choices which you have in game
+</p></div>
+
+</div>
+
+<div id="outline-container-2-5-2" class="outline-4">
+<h4 id="sec-2-5-2"><span class="section-number-4">2.5.2</span> secondscreen</h4>
+<div class="outline-text-4" id="text-2-5-2">
+
+<p>    displays the choices which you have in game
+</p><ul>
+<li id="sec-2-5-2-1">selectrobot<br/>
+     select the robo of your choice
+</li>
+</ul>
+<ul>
+<li id="sec-2-5-2-2">selectbomb<br/>
+     select the bomb and diffusecode of your choice 
+</li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2-6" class="outline-3">
+<h3 id="sec-2-6"><span class="section-number-3">2.6</span> Class Field</h3>
+<div class="outline-text-3" id="text-2-6">
+
+<p> This class is used to plant bomb and diffuse code
+</p>
+</div>
+
+<div id="outline-container-2-6-1" class="outline-4">
+<h4 id="sec-2-6-1"><span class="section-number-4">2.6.1</span> checkexistence</h4>
+<div class="outline-text-4" id="text-2-6-1">
+
+<p>    check if at that particular coordinate already something is present
+</p></div>
+
+</div>
+
+<div id="outline-container-2-6-2" class="outline-4">
+<h4 id="sec-2-6-2"><span class="section-number-4">2.6.2</span> display</h4>
+<div class="outline-text-4" id="text-2-6-2">
+
+<p>    display the bomb and diffusecodes at desired places
+</p></div>
+
+</div>
+
+<div id="outline-container-2-6-3" class="outline-4">
+<h4 id="sec-2-6-3"><span class="section-number-4">2.6.3</span> plant</h4>
+<div class="outline-text-4" id="text-2-6-3">
+
+<p>    plants bomb and diffusecodes at random places
+</p>
+</div>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Control flow</h2>
+<div class="outline-text-2" id="text-3">
+
+<p> The main game code resides in the <code>bombDefuser.py</code> file.This file first import all the required library and design.py file.
+ First the intro class is called which generates the introduction screen , then by pressing different keys different screens comes.
+ By pressinf 1 the game starts.Now all the remaining classes object are initallised.The robot is placed at inital position.
+ Then a loop is run till the number of levels are less then particular number or life not equal to zero or flag not equal to one.
+ In this loop bomb and diffuse codes are planted and enemy are generated at random places.Insides this there is another loop which 
+ wait for user input for predefined interval of time. If no input is received during this period, it continues with the previous input.
+ If <code>p or P</code> key is pressed it <code>pauses</code> the game by entering into a while loop which breaks when <code>p or P</code> is pressed again.A count of 
+ bomb and diffuse codes is mainted when all diffuse codes are collected and then all bomb are collected the next level begins.
+ Flags are set accordingly to bomb and diffuse code count.If number of life is <code>zero</code> and flag equal <code>1 or 2</code> game ends. 
+</p>
+<p>
+ If the player is unsuccessful, the code a
+ <code>Game Over</code> message is displayed along with <code>level</code> and <code>score</code> . Otherwise, a <code>congratulations message</code> is displayed along along with <code>level</code> and <code>score</code>. 
+</p></div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Extra Features</h2>
+<div class="outline-text-2" id="text-4">
+
+
+</div>
+
+<div id="outline-container-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Freedom to choose</h3>
+<div class="outline-text-3" id="text-4-1">
+
+
+</div>
+
+<div id="outline-container-4-1-1" class="outline-4">
+<h4 id="sec-4-1-1"><span class="section-number-4">4.1.1</span> Enemy Robot</h4>
+<div class="outline-text-4" id="text-4-1-1">
+
+<ul>
+<li>You can choose any robot from given choice as your enemy by just entering setting field 
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-4-1-2" class="outline-4">
+<h4 id="sec-4-1-2"><span class="section-number-4">4.1.2</span> Your Robot</h4>
+<div class="outline-text-4" id="text-4-1-2">
+
+<ul>
+<li>You can choose any robot from given choice as your robot by just entering setting field 
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-4-1-3" class="outline-4">
+<h4 id="sec-4-1-3"><span class="section-number-4">4.1.3</span> Diffuse Code</h4>
+<div class="outline-text-4" id="text-4-1-3">
+
+<ul>
+<li>You can choose any type of diffuse code from given choice according to your liking by just entering setting field
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-4-1-4" class="outline-4">
+<h4 id="sec-4-1-4"><span class="section-number-4">4.1.4</span> Bomb</h4>
+<div class="outline-text-4" id="text-4-1-4">
+
+<ul>
+<li>You can choose any bomb from given choice according to your liking by just entering setting field
+</li>
+</ul>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Levels</h3>
+<div class="outline-text-3" id="text-4-2">
+
+<ul>
+<li>After completing each level, in next level there will be one exta bomb to diffuse, one extra enemy to tackle,two extra code to collect.
+</li>
+</ul>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Screen Shots</h2>
+<div class="outline-text-2" id="text-5">
+
+
+</div>
+
+<div id="outline-container-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> Game in Level:2</h3>
+<div class="outline-text-3" id="text-5-1">
+
+<p><img src="./1.png" height="600" width="1000" alt="./1.png" />
+</p></div>
+
+</div>
+
+<div id="outline-container-5-2" class="outline-3">
+<h3 id="sec-5-2"><span class="section-number-3">5.2</span> Paused Game in Level:3</h3>
+<div class="outline-text-3" id="text-5-2">
+
+<p><img src="./2.png" height="600" width="1000" alt="./2.png" />
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2013-06-04 13:30:38 IST</p>
+<p class="author">Author: Mayank</p>
+<p class="creator">Org version 7.8.11 with Emacs version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>

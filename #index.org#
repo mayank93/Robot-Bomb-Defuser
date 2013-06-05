@@ -1,0 +1,97 @@
+#+TITLE: Robot Bomb Defuser
+*NAME* : *MAYANK GUPTA*
+ 
+* Code Organisation
+   The program has been divided into five files:-
+** design.py
+ Contains the designs of robot,bomb,diffuse codes used in the game
+** About.txt
+   Gives a brief introduction of the game
+** Instruction.txt
+   Give detail about various keys to be used in the game
+** Credits.txt
+   A reference to me
+** bombDefuser.py
+   Contains the main game code. Imports/runs other modules if and when necessary.
+ 
+* Code Decomposition
+** Class Keys
+   An object of this class when initallized,has all the keys to be used in the game with particular movement. 
+** Class Screen
+   An object of this class when initallized, returns a screen of max size possible,with a specific border.
+*** end
+    when this is called it end the window
+*** clear
+    when this is called it clear the window,and put the bolrder again 
+*** window
+    if called return the the window created
+** Class Enemy
+  This class is used to to generate enemies at random places
+*** enemyposdecider
+    It generates random coordinates for enemy placement
+*** checkexistence 
+    check if at that particular coordinate already something is present
+*** move
+    It moves the enemy robot
+*** getpos
+    returns the position of enemy
+** Class Robot
+ This class is used to generate user robot
+*** move
+    moves the robot in the field according to user
+*** getpos
+    returns the robot current position
+*** whatatpos
+    returns the characters at current position of robot
+** Class Intro
+ Class which is used to get introduction window 
+*** firstscreen
+    displays the choices which you have in game
+*** secondscreen
+    displays the choices which you have in game
+**** selectrobot
+     select the robo of your choice
+**** selectbomb
+     select the bomb and diffusecode of your choice 
+** Class Field
+ This class is used to plant bomb and diffuse code
+*** checkexistence
+    check if at that particular coordinate already something is present
+*** display
+    display the bomb and diffusecodes at desired places
+*** plant
+    plants bomb and diffusecodes at random places
+
+* Control flow
+ The main game code resides in the =bombDefuser.py= file.This file first import all the required library and design.py file.
+ First the intro class is called which generates the introduction screen , then by pressing different keys different screens comes.
+ By pressinf 1 the game starts.Now all the remaining classes object are initallised.The robot is placed at inital position.
+ Then a loop is run till the number of levels are less then particular number or life not equal to zero or flag not equal to one.
+ In this loop bomb and diffuse codes are planted and enemy are generated at random places.Insides this there is another loop which 
+ wait for user input for predefined interval of time. If no input is received during this period, it continues with the previous input.
+ If =p or P= key is pressed it =pauses= the game by entering into a while loop which breaks when =p or P= is pressed again.A count of 
+ bomb and diffuse codes is mainted when all diffuse codes are collected and then all bomb are collected the next level begins.
+ Flags are set accordingly to bomb and diffuse code count.If number of life is =zero= and flag equal =1 or 2= game ends. 
+
+ If the player is unsuccessful, the code a
+ =Game Over= message is displayed along with =level= and =score= . Otherwise, a =congratulations message= is displayed along along with =level= and =score=. 
+* Extra Features
+** Freedom to choose 
+*** Enemy Robot
+  - You can choose any robot from given choice as your enemy by just entering setting field 
+*** Your Robot
+  - You can choose any robot from given choice as your robot by just entering setting field 
+*** Diffuse Code
+  - You can choose any type of diffuse code from given choice according to your liking by just entering setting field
+*** Bomb 
+  - You can choose any bomb from given choice according to your liking by just entering setting field
+**  Levels
+ - After completing each level, in next level there will be one exta bomb to diffuse, one extra enemy to tackle,two extra code to collect.
+* Screen Shots
+** Game in Level:2
+#+ATTR_HTML: height="600" width="1000"
+[[file:./1.png]]
+** Paused Game in Level:3
+#+ATTR_HTML: height="600" width="1000" 
+[[file:./2.png]]
+ 
